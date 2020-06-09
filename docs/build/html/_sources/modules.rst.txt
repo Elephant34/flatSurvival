@@ -5,3 +5,5 @@ flatSurvival
    :maxdepth: 4
 
    flatSurvival
+   buttons
+   veiws
