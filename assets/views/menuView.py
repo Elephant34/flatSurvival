@@ -38,10 +38,6 @@ class MenuView(arcade.View):
 
         self.menu_theme.add_button_textures(normal, hover, clicked, locked)
 
-    def on_show(self) -> None:
-        """Loads all the text and buttons
-        """
-
         # Adds all of the buttons to the menu
         self.button_list += [
             TextButton(
@@ -76,11 +72,21 @@ class MenuView(arcade.View):
     def on_draw(self) -> None:
         """Draws all menu objects to the screen
         """
-        super().on_draw()
+        arcade.start_render()
 
         for button in self.button_list:
             if button.active:
                 button.draw()
+
+        arcade.draw_text(
+            "Flat Survival",
+            self.window.width / 2,
+            500,
+            arcade.color.WHITE,
+            70,
+            anchor_x="center",
+            anchor_y="center"
+        )
 
     def start_game(self) -> None:
         """Switchs to the game veiw called by button press

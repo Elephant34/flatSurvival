@@ -60,8 +60,8 @@ class TextButton(arcade.gui.TextButton):
         """Called when the button is realeased
         This will call the given function"""
         if self.pressed:
-            self.function()
             self.pressed = False
+            self.function()
 
     def draw_texture_theme(self) -> None:
         """Draws the theme items to the button
