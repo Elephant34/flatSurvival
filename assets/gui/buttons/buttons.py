@@ -57,7 +57,8 @@ class TextButton(arcade.gui.TextButton):
             self.pressed = True
 
     def on_release(self) -> None:
-        """Called when the button is realeased"""
+        """Called when the button is realeased
+        This will call the given function"""
         if self.pressed:
             self.function()
             self.pressed = False

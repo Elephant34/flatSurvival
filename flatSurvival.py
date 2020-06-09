@@ -5,7 +5,7 @@ from datetime import datetime
 import logging
 import pathlib
 
-from assets.veiws.menuView import MenuView
+from assets.views.menuView import MenuView
 
 import arcade
 

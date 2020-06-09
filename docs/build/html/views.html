@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>veiws package &mdash; flatSurvival 0.0.1 documentation</title>
+  <title>views package &mdash; flatSurvival 0.0.1 documentation</title>
   
 
   
@@ -84,12 +84,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">flatSurvival</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="flatSurvival.html">flatSurvival</a></li>
 <li class="toctree-l2"><a class="reference internal" href="buttons.html">buttons package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">veiws package</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">views package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-veiws.gameView">veiws.gameView module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-veiws.menuView">veiws.menuView module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-veiws.pauseView">veiws.pauseView module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-veiws">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-views.gameView">views.gameView module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-views.menuView">views.menuView module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-views.pauseView">views.pauseView module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-views">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -141,13 +141,13 @@
         
           <li><a href="modules.html">flatSurvival</a> &raquo;</li>
         
-      <li>veiws package</li>
+      <li>views package</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/veiws.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/views.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,20 +160,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="veiws-package">
-<h1>veiws package<a class="headerlink" href="#veiws-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="views-package">
+<h1>views package<a class="headerlink" href="#views-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-veiws.gameView">
-<span id="veiws-gameview-module"></span><h2>veiws.gameView module<a class="headerlink" href="#module-veiws.gameView" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-views.gameView">
+<span id="views-gameview-module"></span><h2>views.gameView module<a class="headerlink" href="#module-views.gameView" title="Permalink to this headline">¶</a></h2>
+<p>Loads and controls the main game</p>
+<dl class="py class">
+<dt id="views.gameView.GameView">
+<em class="property">class </em><code class="sig-prename descclassname">views.gameView.</code><code class="sig-name descname">GameView</code><a class="headerlink" href="#views.gameView.GameView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arcade.application.View</span></code></p>
+<p>The main game screen with all game elements</p>
+</dd></dl>
+
 </div>
-<div class="section" id="module-veiws.menuView">
-<span id="veiws-menuview-module"></span><h2>veiws.menuView module<a class="headerlink" href="#module-veiws.menuView" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-views.menuView">
+<span id="views-menuview-module"></span><h2>views.menuView module<a class="headerlink" href="#module-views.menuView" title="Permalink to this headline">¶</a></h2>
 <p>The main menu screen loaded when the game is started</p>
 <dl class="py class">
-<dt id="veiws.menuView.MenuView">
-<em class="property">class </em><code class="sig-prename descclassname">veiws.menuView.</code><code class="sig-name descname">MenuView</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">arcade.application.Window</span></em><span class="sig-paren">)</span><a class="headerlink" href="#veiws.menuView.MenuView" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView">
+<em class="property">class </em><code class="sig-prename descclassname">views.menuView.</code><code class="sig-name descname">MenuView</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">arcade.application.Window</span></em><span class="sig-paren">)</span><a class="headerlink" href="#views.menuView.MenuView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arcade.application.View</span></code></p>
 <p>The main menu screen</p>
 <dl class="field-list simple">
@@ -182,44 +190,44 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="veiws.menuView.MenuView.exit_game">
-<code class="sig-name descname">exit_game</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#veiws.menuView.MenuView.exit_game" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView.exit_game">
+<code class="sig-name descname">exit_game</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.exit_game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quits the game and closes the window</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="veiws.menuView.MenuView.load_credits">
-<code class="sig-name descname">load_credits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#veiws.menuView.MenuView.load_credits" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView.load_credits">
+<code class="sig-name descname">load_credits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.load_credits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the games credits
 WIP</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="veiws.menuView.MenuView.on_draw">
-<code class="sig-name descname">on_draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#veiws.menuView.MenuView.on_draw" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView.on_draw">
+<code class="sig-name descname">on_draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.on_draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws all menu objects to the screen</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="veiws.menuView.MenuView.on_show">
-<code class="sig-name descname">on_show</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#veiws.menuView.MenuView.on_show" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView.on_show">
+<code class="sig-name descname">on_show</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.on_show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads all the text and buttons</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="veiws.menuView.MenuView.start_game">
-<code class="sig-name descname">start_game</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#veiws.menuView.MenuView.start_game" title="Permalink to this definition">¶</a></dt>
+<dt id="views.menuView.MenuView.start_game">
+<code class="sig-name descname">start_game</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.start_game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Switchs to the game veiw called by button press</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-veiws.pauseView">
-<span id="veiws-pauseview-module"></span><h2>veiws.pauseView module<a class="headerlink" href="#module-veiws.pauseView" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-views.pauseView">
+<span id="views-pauseview-module"></span><h2>views.pauseView module<a class="headerlink" href="#module-views.pauseView" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-veiws">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-veiws" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-views" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

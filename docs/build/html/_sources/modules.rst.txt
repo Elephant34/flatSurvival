@@ -6,4 +6,4 @@ flatSurvival
 
    flatSurvival
    buttons
-   veiws
+   views

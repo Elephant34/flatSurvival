@@ -1,29 +1,29 @@
-veiws package
+views package
 =============
 
 Submodules
 ----------
 
-veiws.gameView module
+views.gameView module
 ---------------------
 
-.. automodule:: veiws.gameView
+.. automodule:: views.gameView
    :members:
    :undoc-members:
    :show-inheritance:
 
-veiws.menuView module
+views.menuView module
 ---------------------
 
-.. automodule:: veiws.menuView
+.. automodule:: views.menuView
    :members:
    :undoc-members:
    :show-inheritance:
 
-veiws.pauseView module
+views.pauseView module
 ----------------------
 
-.. automodule:: veiws.pauseView
+.. automodule:: views.pauseView
    :members:
    :undoc-members:
    :show-inheritance:
@@ -32,7 +32,7 @@ veiws.pauseView module
 Module contents
 ---------------
 
-.. automodule:: veiws
+.. automodule:: views
    :members:
    :undoc-members:
    :show-inheritance:

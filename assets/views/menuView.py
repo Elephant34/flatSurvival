@@ -6,6 +6,7 @@ import pathlib
 
 import arcade
 
+from assets.views.gameView import GameView
 from assets.gui.buttons.buttons import TextButton
 
 
@@ -85,6 +86,8 @@ class MenuView(arcade.View):
         """Switchs to the game veiw called by button press
         """
         logging.info("Switching to game veiw")
+        game_veiw = GameView(self.window)
+        self.window.show_view(game_veiw)
 
     def exit_game(self) -> None:
         """Quits the game and closes the window
