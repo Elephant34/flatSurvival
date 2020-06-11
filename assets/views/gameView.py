@@ -3,6 +3,7 @@
 import logging
 
 from assets.world.loadWorldData import load_data
+from assets.world.generateTilemap import load_tilemap
 
 import arcade
 
@@ -26,7 +27,14 @@ class GameView(arcade.View):
 
         self.world_data = load_data()
 
+        self.tilemap = load_tilemap(
+            self.world_data["version"],
+            self.world_data["tilemap"]
+        )
+
     def on_draw(self) -> None:
         """Draws all game objects to the screen
         """
         arcade.start_render()
+
+        self.tilemap.draw()

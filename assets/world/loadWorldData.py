@@ -87,7 +87,7 @@ def generate_tilemap() -> list:
     """
 
     tilemap = [
-        [0 for i in range(30)] for i in range(30)
+        [{0: 10} for i in range(30)] for i in range(30)
     ]
 
     return tilemap
