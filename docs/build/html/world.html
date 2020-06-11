@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>world package &mdash; flatSurvival 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="views package" href="views.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> flatSurvival
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">flatSurvival</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="flatSurvival.html">flatSurvival</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buttons.html">buttons package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">views package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">world package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-world.generateTilemap">world.generateTilemap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-world.loadWorldData">world.loadWorldData module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-world.tiles_0_0_1">world.tiles_0_0_1 module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-world">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">flatSurvival</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">flatSurvival</a> &raquo;</li>
+        
+      <li>world package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/world.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="world-package">
+<h1>world package<a class="headerlink" href="#world-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-world.generateTilemap">
+<span id="world-generatetilemap-module"></span><h2>world.generateTilemap module<a class="headerlink" href="#module-world.generateTilemap" title="Permalink to this headline">¶</a></h2>
+<p>Generates the world tilemap
+Different loader called depending on the game version
+This ensures saves are backwards compatable</p>
+<dl class="py function">
+<dt id="world.generateTilemap.load_0_0_1">
+<code class="sig-prename descclassname">world.generateTilemap.</code><code class="sig-name descname">load_0_0_1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tiledata</span></em><span class="sig-paren">)</span> &#x2192; arcade.sprite_list.SpriteList<a class="headerlink" href="#world.generateTilemap.load_0_0_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for dev version 0.0.1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tiledata</strong> (<em>list</em>) – The tile list from the world save</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of sprites for easy drawing</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>arcade.SpriteList</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="world.generateTilemap.load_tilemap">
+<code class="sig-prename descclassname">world.generateTilemap.</code><code class="sig-name descname">load_tilemap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">save_version</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">tiledata</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; arcade.sprite_list.SpriteList<a class="headerlink" href="#world.generateTilemap.load_tilemap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will return a sprite list of all tilemap entities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>save_version</strong> (<em>str</em>) – The version the save was made for compatability</p></li>
+<li><p><strong>tiledata</strong> (<em>list</em>) – The tile list from the world save</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An arcade sprite list which can be draw to the screen</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>arcade.SpriteList</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-world.loadWorldData">
+<span id="world-loadworlddata-module"></span><h2>world.loadWorldData module<a class="headerlink" href="#module-world.loadWorldData" title="Permalink to this headline">¶</a></h2>
+<p>Methods for the loading and generation of the game data</p>
+<dl class="py function">
+<dt id="world.loadWorldData.generate_new_world">
+<code class="sig-prename descclassname">world.loadWorldData.</code><code class="sig-name descname">generate_new_world</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#world.loadWorldData.generate_new_world" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a new worldSave.json file and populates it with defaults</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="world.loadWorldData.generate_passive">
+<code class="sig-prename descclassname">world.loadWorldData.</code><code class="sig-name descname">generate_passive</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#world.loadWorldData.generate_passive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates some passive mobs around the players spawn</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of the mob data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="world.loadWorldData.generate_player">
+<code class="sig-prename descclassname">world.loadWorldData.</code><code class="sig-name descname">generate_player</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#world.loadWorldData.generate_player" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates new player data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a dict of player data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="world.loadWorldData.generate_tilemap">
+<code class="sig-prename descclassname">world.loadWorldData.</code><code class="sig-name descname">generate_tilemap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#world.loadWorldData.generate_tilemap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the world terrain tilemap
+WIP so only returns grass for now</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns a 2d list of tile id’s</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="world.loadWorldData.load_data">
+<code class="sig-prename descclassname">world.loadWorldData.</code><code class="sig-name descname">load_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#world.loadWorldData.load_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will read the world save or create a new one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary of the world save</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-world.tiles_0_0_1">
+<span id="world-tiles-0-0-1-module"></span><h2>world.tiles_0_0_1 module<a class="headerlink" href="#module-world.tiles_0_0_1" title="Permalink to this headline">¶</a></h2>
+<p>Stores the tile sprites for version: 0.0.1</p>
+<dl class="py class">
+<dt id="world.tiles_0_0_1.Grass">
+<em class="property">class </em><code class="sig-prename descclassname">world.tiles_0_0_1.</code><code class="sig-name descname">Grass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">center_x</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">center_y</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#world.tiles_0_0_1.Grass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arcade.sprite.Sprite</span></code></p>
+<p>Creates a grass tile sprite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center_x</strong> (<em>int</em>) – x position</p></li>
+<li><p><strong>center_y</strong> (<em>int</em>) – y position</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="world.tiles_0_0_1.Unknown">
+<em class="property">class </em><code class="sig-prename descclassname">world.tiles_0_0_1.</code><code class="sig-name descname">Unknown</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">center_x</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">center_y</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#world.tiles_0_0_1.Unknown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arcade.sprite.Sprite</span></code></p>
+<p>Creates a unknown tile sprite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center_x</strong> (<em>int</em>) – x position</p></li>
+<li><p><strong>center_y</strong> (<em>int</em>) – y position</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-world">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-world" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="views.html" class="btn btn-neutral float-left" title="views package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Elephant34
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

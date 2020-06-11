@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="world package" href="world.html" />
     <link rel="prev" title="buttons package" href="buttons.html" /> 
 </head>
 
@@ -92,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-views">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="world.html">world package</a></li>
 </ul>
 </li>
 </ul>
@@ -170,9 +172,20 @@
 <p>Loads and controls the main game</p>
 <dl class="py class">
 <dt id="views.gameView.GameView">
-<em class="property">class </em><code class="sig-prename descclassname">views.gameView.</code><code class="sig-name descname">GameView</code><a class="headerlink" href="#views.gameView.GameView" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">views.gameView.</code><code class="sig-name descname">GameView</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">arcade.application.Window</span></em><span class="sig-paren">)</span><a class="headerlink" href="#views.gameView.GameView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arcade.application.View</span></code></p>
 <p>The main game screen with all game elements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>window</strong> (<em>arcade.Window</em>) – The main window used to switch views</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="views.gameView.GameView.on_draw">
+<code class="sig-name descname">on_draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.gameView.GameView.on_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws all game objects to the screen</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -209,12 +222,6 @@ WIP</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="views.menuView.MenuView.on_show">
-<code class="sig-name descname">on_show</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.on_show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads all the text and buttons</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="views.menuView.MenuView.start_game">
 <code class="sig-name descname">start_game</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#views.menuView.MenuView.start_game" title="Permalink to this definition">¶</a></dt>
 <dd><p>Switchs to the game veiw called by button press</p>
@@ -238,6 +245,8 @@ WIP</p>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="world.html" class="btn btn-neutral float-right" title="world package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="buttons.html" class="btn btn-neutral float-left" title="buttons package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
