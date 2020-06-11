@@ -4,6 +4,7 @@ import logging
 
 from assets.world.loadWorldData import load_data
 from assets.world.generateTilemap import load_tilemap
+from assets.player.player import Player
 
 import arcade
 
@@ -32,9 +33,50 @@ class GameView(arcade.View):
             self.world_data["tilemap"]
         )
 
+        self.player = Player(self.world_data["player"])
+
+        self.collision_list = arcade.SpriteList()
+
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player,
+                                                         self.collision_list)
+
     def on_draw(self) -> None:
         """Draws all game objects to the screen
         """
         arcade.start_render()
 
         self.tilemap.draw()
+        self.player.draw()
+
+    def on_update(self, dt: float) -> None:
+        """Run whenever the game screen is updated
+
+        :param dt: Delta time between frames
+        :type dt: float
+        """
+
+        self.physics_engine.update()
+
+        self.world_data["player"]["pos"] = list(self.player.position)
+
+    def on_key_press(self, key: int, modifiers: int) -> None:
+        """handels key presses
+
+        :param key: arcade key index
+        :type key: int
+        :param modifiers: given if shift or control keys are pressed
+        :type modifiers: int
+        """
+
+        self.player.on_key_press(key, modifiers)
+
+    def on_key_release(self, key: int, modifiers: int) -> None:
+        """handles key releases
+
+        :param key: arcade key index
+        :type key: int
+        :param modifiers: gives if modifer keys are also pressed
+        :type modifiers: int
+        """
+
+        self.player.on_key_release(key, modifiers)
