@@ -5,6 +5,7 @@ import logging
 from assets.world.loadWorldData import load_data
 from assets.world.generateTilemap import load_tilemap
 from assets.player.player import Player
+from assets.views.pauseView import PauseView
 
 import arcade
 
@@ -24,7 +25,10 @@ class GameView(arcade.View):
 
         logging.info("On game screen")
 
-        self.winodw = window
+        self.window = window
+
+        self.width = window.width
+        self.height = window.height
 
         self.world_data = load_data()
 
@@ -67,6 +71,10 @@ class GameView(arcade.View):
         :param modifiers: given if shift or control keys are pressed
         :type modifiers: int
         """
+
+        if key == arcade.key.ESCAPE or key == arcade.key.P:
+            pause_view = PauseView(self.window, self)
+            self.window.show_view(pause_view)
 
         self.player.on_key_press(key, modifiers)
 

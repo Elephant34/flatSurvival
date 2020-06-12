@@ -51,6 +51,8 @@ class Player(arcade.Sprite):
 
         self.down_pressed = False
         self.up_pressed = False
+        self.left_pressed = False
+        self.right_pressed = False
 
     def on_key_press(self, key: int, modifiers: int) -> None:
         """handels key presses
@@ -69,8 +71,10 @@ class Player(arcade.Sprite):
             self.down_pressed = True
         elif key in self.movement_keys["left"]:
             self.change_x -= self.movement_speed
+            self.left_pressed = True
         elif key in self.movement_keys["right"]:
             self.change_x += self.movement_speed
+            self.right_pressed = True
 
     def on_key_release(self, key: int, modifiers: int) -> None:
         """handles key releases
@@ -89,8 +93,10 @@ class Player(arcade.Sprite):
             self.down_pressed = False
         elif key in self.movement_keys["left"]:
             self.change_x += self.movement_speed
+            self.left_pressed = False
         elif key in self.movement_keys["right"]:
             self.change_x -= self.movement_speed
+            self.right_pressed = False
 
     def on_update(self, dt: float) -> None:
         """Updates the player
@@ -99,8 +105,12 @@ class Player(arcade.Sprite):
         :type dt: float
         """
 
-        # Workaround for weird collision issue
+        # Workaround for weird collision issue and moving off pause screen
         if self.down_pressed and not self.up_pressed:
             self.change_y = -self.movement_speed
         if self.up_pressed and not self.down_pressed:
             self.change_y = self.movement_speed
+        if self.left_pressed and not self.right_pressed:
+            self.change_x = -self.movement_speed
+        if self.right_pressed and not self.left_pressed:
+            self.change_x = self.movement_speed
