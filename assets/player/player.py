@@ -49,12 +49,8 @@ class Player(arcade.Sprite):
 
         self.movement_speed = self.player_data["multipliers"]["speed"] * 5
 
-        self.movment_vectors = {
-            "up": False,
-            "down": False,
-            "left": False,
-            "right": False
-        }
+        self.down_pressed = False
+        self.up_pressed = False
 
     def on_key_press(self, key: int, modifiers: int) -> None:
         """handels key presses
@@ -67,8 +63,10 @@ class Player(arcade.Sprite):
 
         if key in self.movement_keys["up"]:
             self.change_y += self.movement_speed
+            self.up_pressed = True
         elif key in self.movement_keys["down"]:
             self.change_y -= self.movement_speed
+            self.down_pressed = True
         elif key in self.movement_keys["left"]:
             self.change_x -= self.movement_speed
         elif key in self.movement_keys["right"]:
@@ -85,9 +83,24 @@ class Player(arcade.Sprite):
 
         if key in self.movement_keys["up"]:
             self.change_y -= self.movement_speed
+            self.up_pressed = False
         elif key in self.movement_keys["down"]:
             self.change_y += self.movement_speed
+            self.down_pressed = False
         elif key in self.movement_keys["left"]:
             self.change_x += self.movement_speed
         elif key in self.movement_keys["right"]:
             self.change_x -= self.movement_speed
+
+    def on_update(self, dt: float) -> None:
+        """Updates the player
+
+        :param dt: delta time since last frame
+        :type dt: float
+        """
+
+        # Workaround for weird collision issue
+        if self.down_pressed and not self.up_pressed:
+            self.change_y = -self.movement_speed
+        if self.up_pressed and not self.down_pressed:
+            self.change_y = self.movement_speed

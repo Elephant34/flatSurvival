@@ -14,7 +14,7 @@ def load_tilemap(save_version: str, tiledata: list) -> arcade.SpriteList:
     :type save_version: str
     :param tiledata: The tile list from the world save
     :type tiledata: list
-    :return: An arcade sprite list which can be draw to the screen
+    :return: Two arcade sprite list which can be draw to the screen
     :rtype: arcade.SpriteList
     """
 
@@ -27,19 +27,23 @@ def load_0_0_1(tiledata) -> arcade.SpriteList:
 
     :param tiledata: The tile list from the world save
     :type tiledata: list
-    :return: List of sprites for easy drawing
+    :return: Two of sprites for easy drawing and collision
     :rtype: arcade.SpriteList
     """
 
     tile_lookup = {
+        "unknown": tiles_0_0_1.Unknown,
         "0": tiles_0_0_1.Grass,
-        "unknown": tiles_0_0_1.Unknown
+        "1": tiles_0_0_1.Stone,
+        "2": tiles_0_0_1.Tree,
+        "3": tiles_0_0_1.Wall,
     }
 
     tilemap = arcade.SpriteList(
         use_spatial_hash=True,
         is_static=True
     )
+    collision_list = arcade.SpriteList()
 
     for row_index, row in enumerate(tiledata):
         for cell_index, cell in enumerate(row):
@@ -57,5 +61,9 @@ def load_0_0_1(tiledata) -> arcade.SpriteList:
             tilemap.append(
                 tile
             )
+            if tile.player_collides:
+                collision_list.append(
+                    tile
+                )
 
-    return tilemap
+    return tilemap, collision_list
