@@ -41,11 +41,11 @@ def generate_new_world() -> None:
         "version": version.version,
         "time": 0,
         "player": generate_player(),
-        "tilemap": generate_tilemap(),
         "mobs": {
             "passive": generate_passive(),
             "hostile": []
-        }
+        },
+        "tilemap": generate_tilemap(),
     }
 
     with save_path.open("w") as save:
@@ -85,9 +85,18 @@ def generate_tilemap() -> list:
     :rtype: list
     """
 
+    size = 30
+
     tilemap = [
-        [{0: 0} for i in range(30)]
-    ] + [[{0: 0}] + [{1: 0} for i in range(30)] for i in range(30)]
+        [{0: 0} for i in range(size + 1)],
+        [{0: 0} for i in range(size + 1)]
+    ]
+
+    for i in range(size):
+        tilemap.insert(
+            i+1,
+            [{0: 0}] + [{1: 0} for i in range(size)] + [{0: 0}]
+        )
 
     return tilemap
 

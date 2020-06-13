@@ -3,7 +3,6 @@
 import json
 import logging
 import pathlib
-import threading
 
 import arcade
 
@@ -54,7 +53,7 @@ class GameView(arcade.View):
 
         self.save_path = pathlib.Path("assets/data/worldSave.json")
         arcade.schedule(
-            lambda dt: threading.Thread(target=self.save).start(),
+            lambda e: self.save,
             10
         )
 
