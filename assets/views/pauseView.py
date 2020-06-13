@@ -1,7 +1,12 @@
 """Shown when the game is paused
 """
 
+import logging
+import pathlib
+
 import arcade
+
+from assets.gui.buttons.buttons import TextButton
 
 
 class PauseView(arcade.View):
@@ -26,11 +31,36 @@ class PauseView(arcade.View):
         self.width = self.window.width
         self.height = self.window.height
 
+        self.menu_theme = arcade.gui.Theme()
+
+        normal = pathlib.Path("assets/data/buttons/Normal.png")
+        hover = pathlib.Path("assets/data/buttons/Hover.png")
+        clicked = pathlib.Path("assets/data/buttons/Clicked.png")
+        locked = pathlib.Path("assets/data/buttons/Locked.png")
+
+        self.menu_theme.add_button_textures(normal, hover, clicked, locked)
+
+        self.button_list += [
+            TextButton(
+                self.width / 2,
+                350,
+                270,
+                50,
+                "Save and Quit",
+                self.exit_game,
+                self.menu_theme
+            )
+        ]
+
     def on_draw(self) -> None:
         """Draw everything to the screen
         """
 
         arcade.start_render()
+
+        for button in self.button_list:
+            if button.active:
+                button.draw()
 
         arcade.draw_text(
             "Paused",
@@ -44,7 +74,7 @@ class PauseView(arcade.View):
         arcade.draw_text(
             "Press ESC or P to resume",
             self.window.width / 2,
-            300,
+            400,
             arcade.color.WHITE,
             30,
             anchor_x="center",
@@ -61,4 +91,14 @@ class PauseView(arcade.View):
         """
 
         if key == arcade.key.ESCAPE or key == arcade.key.P:
+            logging.info("Resuming game")
             self.window.show_view(self.game_view)
+
+    def exit_game(self) -> None:
+        """Saves and quits the game
+        """
+        logging.info("Exiting game")
+
+        self.game_view.save()
+
+        self.window.close()

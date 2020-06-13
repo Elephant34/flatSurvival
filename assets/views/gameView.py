@@ -1,13 +1,16 @@
 """Loads and controls the main game
 """
+import json
 import logging
-
-from assets.world.loadWorldData import load_data
-from assets.world.generateTilemap import load_tilemap
-from assets.player.player import Player
-from assets.views.pauseView import PauseView
+import pathlib
+import threading
 
 import arcade
+
+from assets.player.player import Player
+from assets.views.pauseView import PauseView
+from assets.world.generateTilemap import load_tilemap
+from assets.world.loadWorldData import load_data
 
 
 class GameView(arcade.View):
@@ -42,6 +45,19 @@ class GameView(arcade.View):
         self.physics_engine = arcade.PhysicsEngineSimple(self.player,
                                                          self.collision_list)
 
+        arcade.set_viewport(
+            self.player.left - 400,
+            self.player.right + 400,
+            self.player.bottom - 300,
+            self.player.top + 300
+        )
+
+        self.save_path = pathlib.Path("assets/data/worldSave.json")
+        arcade.schedule(
+            lambda dt: threading.Thread(target=self.save).start(),
+            10
+        )
+
     def on_draw(self) -> None:
         """Draws all game objects to the screen
         """
@@ -62,6 +78,26 @@ class GameView(arcade.View):
         self.player.on_update(dt)
 
         self.world_data["player"]["pos"] = list(self.player.position)
+
+        current_viewport = arcade.get_viewport()
+
+        view_x, view_y = 0, 0
+
+        if self.player.left < current_viewport[0] + 100:
+            view_x = self.player.change_x
+        if self.player.right > current_viewport[1] - 100:
+            view_x = self.player.change_x
+        if self.player.bottom < current_viewport[2] + 100:
+            view_y = self.player.change_y
+        if self.player.top > current_viewport[3] - 100:
+            view_y = self.player.change_y
+
+        arcade.set_viewport(
+                current_viewport[0] + view_x,
+                current_viewport[1] + view_x,
+                current_viewport[2] + view_y,
+                current_viewport[3] + view_y
+            )
 
     def on_key_press(self, key: int, modifiers: int) -> None:
         """handels key presses
@@ -88,3 +124,12 @@ class GameView(arcade.View):
         """
 
         self.player.on_key_release(key, modifiers)
+
+    def save(self) -> None:
+        """Writes the current world_data to the save file
+        """
+
+        save_data = self.world_data
+
+        with self.save_path.open("w") as save:
+            json.dump(save_data, save, indent=4)

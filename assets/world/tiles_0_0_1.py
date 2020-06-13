@@ -26,6 +26,27 @@ class Unknown(arcade.Sprite):
         self.player_collides = True
 
 
+class Void(arcade.Sprite):
+    """Creates a void tile sprite
+
+    :param center_x: x position
+    :type center_x: int
+    :param center_y: y position
+    :type center_y: int
+    """
+
+    def __init__(self, center_x: int, center_y: int) -> None:
+        """Constructor method
+        """
+        super().__init__(
+            pathlib.Path("assets/data/tiles/void.png"),
+            center_x=center_x,
+            center_y=center_y
+        )
+
+        self.player_collides = True
+
+
 class Grass(arcade.Sprite):
     """Creates a grass tile sprite
 

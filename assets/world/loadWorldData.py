@@ -1,11 +1,10 @@
 """Methods for the loading and generation of the game data
 """
+import json
 import logging
 import pathlib
-import json
 
 from assets.data import version
-
 
 save_path = pathlib.Path("assets/data/worldSave.json")
 
@@ -87,8 +86,8 @@ def generate_tilemap() -> list:
     """
 
     tilemap = [
-        [{0: 10} for i in range(30)] for i in range(30)
-    ]
+        [{0: 0} for i in range(30)]
+    ] + [[{0: 0}] + [{1: 0} for i in range(30)] for i in range(30)]
 
     return tilemap
 

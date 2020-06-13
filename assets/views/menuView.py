@@ -6,8 +6,8 @@ import pathlib
 
 import arcade
 
-from assets.views.gameView import GameView
 from assets.gui.buttons.buttons import TextButton
+from assets.views.gameView import GameView
 
 
 class MenuView(arcade.View):

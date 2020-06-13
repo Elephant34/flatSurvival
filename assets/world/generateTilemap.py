@@ -33,10 +33,11 @@ def load_0_0_1(tiledata) -> arcade.SpriteList:
 
     tile_lookup = {
         "unknown": tiles_0_0_1.Unknown,
-        "0": tiles_0_0_1.Grass,
-        "1": tiles_0_0_1.Stone,
-        "2": tiles_0_0_1.Tree,
-        "3": tiles_0_0_1.Wall,
+        "0": tiles_0_0_1.Void,
+        "1": tiles_0_0_1.Grass,
+        "2": tiles_0_0_1.Stone,
+        "3": tiles_0_0_1.Tree,
+        "4": tiles_0_0_1.Wall,
     }
 
     tilemap = arcade.SpriteList(
@@ -49,13 +50,13 @@ def load_0_0_1(tiledata) -> arcade.SpriteList:
         for cell_index, cell in enumerate(row):
             if list(cell.keys())[0] in tile_lookup:
                 tile = tile_lookup[list(cell.keys())[0]](
-                    center_x=((cell_index+1)*64)-32,
-                    center_y=((row_index+1)*64)-32
+                    center_x=((cell_index+1)*64)-128,
+                    center_y=((row_index+1)*64)-128
                 )
             else:
                 tile = tile_lookup["unknown"](
-                    center_x=((cell_index+1)*64)-32,
-                    center_y=((row_index+1)*64)-32
+                    center_x=((cell_index+1)*64)-128,
+                    center_y=((row_index+1)*64)-128
                 )
 
             tilemap.append(
