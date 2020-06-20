@@ -2,69 +2,177 @@
 Different loader called depending on the game version
 This ensures saves are backwards compatable
 """
+import json
+import pathlib
+from collections import Counter
+
 import arcade
 
 from assets.world import tiles_0_0_1
+from assets.world.loadWorldData import add_zone
 
 
-def load_tilemap(save_version: str, tiledata: list) -> arcade.SpriteList:
-    """Will return a sprite list of all tilemap entities
+class Save_0_0_1:
+    """Class to handle the world tilemap
 
-    :param save_version: The version the save was made for compatability
+    :param save_version: The version of the save for back compatability
     :type save_version: str
-    :param tiledata: The tile list from the world save
-    :type tiledata: list
-    :return: Two arcade sprite list which can be draw to the screen
-    :rtype: arcade.SpriteList
+    :param tiledata: Dict with paths of the tile zones
+    :type tiledata: dict
+    """
+
+    def __init__(self, save_version: str, tiledata: dict) -> None:
+        """Constructor method
+        """
+
+        self.save_version = save_version
+        self.tiledata = tiledata
+
+        self.zone_size = tiledata["size"]
+        self.zone_length = self.zone_size * 64
+
+        self.tile_lookup = {
+            "unknown": tiles_0_0_1.Unknown,
+            "0": tiles_0_0_1.Void,
+            "1": tiles_0_0_1.Grass,
+            "2": tiles_0_0_1.Stone,
+            "3": tiles_0_0_1.Tree,
+            "4": tiles_0_0_1.Wall,
+        }
+
+        self.loaded_zones = []
+
+    def load_tilemap(self, player_pos: tuple) -> arcade.SpriteList:
+        """Loads all the rendered tilemap zones
+
+        :param player_pos: Gets the player current postition to load local
+        :type player_pos: tuple
+        :return: Returns two lists: all tiles and collision tiles
+        :rtype: arcade.SpriteList
+        """
+
+        self.player_pos = player_pos
+        self.loaded_zones = self.get_player_zones()
+
+        self.tilemap = arcade.SpriteList(
+            use_spatial_hash=True,
+            is_static=True
+        )
+        self.collision_map = arcade.SpriteList(
+            use_spatial_hash=True,
+            is_static=True
+        )
+
+        for zone in self.loaded_zones:
+
+            zone_x = int(zone[0])
+            zone_y = int(zone[2])
+
+            try:
+                zone_path = pathlib.Path(self.tiledata[zone])
+            except KeyError:
+                self.tiledata[zone] = str(add_zone(
+                    zone_x,
+                    zone_y,
+                    self.zone_size
+                ))
+                zone_path = pathlib.Path(self.tiledata[zone])
+
+            with zone_path.open() as save:
+                data = json.load(save)
+
+            for row_index, row in enumerate(data):
+                for cell_index, cell in enumerate(row):
+
+                    cell_x = ((((cell_index+1)*64)-128) +
+                              (zone_x*self.zone_length))
+                    cell_y = ((((row_index+1)*64)-128) +
+                              (zone_y*self.zone_length))
+
+                    if list(cell.keys())[0] in self.tile_lookup:
+                        tile = self.tile_lookup[list(cell.keys())[0]](
+                            center_x=cell_x,
+                            center_y=cell_y
+                        )
+                    else:
+                        tile = self.tile_lookup["unknown"](
+                            center_x=cell_x,
+                            center_y=cell_y
+                        )
+
+                    self.tilemap.append(
+                        tile
+                    )
+                    if tile.player_collides:
+                        self.collision_map.append(
+                            tile
+                        )
+
+        return self.tilemap, self.collision_map
+
+    def validate_zones(self, player_pos: tuple) -> bool:
+        """Checks if the the next zone should be loaded
+
+        :param player_pos: Current player position
+        :type player_pos: tuple
+        :return: true if the loaded tiles are correct false otherwise
+        :rtype: bool
+        """
+
+        self.player_pos = player_pos
+        self.player_zones = self.get_player_zones()
+
+        return Counter(self.player_zones) == Counter(self.loaded_zones)
+
+    def get_player_zones(self) -> list:
+        """Gets the zone(s) the player is in
+
+        :return: list of zone string codes
+        :rtype: list
+        """
+
+        zone_list = []
+
+        x_zone = int((self.player_pos[0]+128) // self.zone_length)
+        y_zone = int((self.player_pos[1]+128) // self.zone_length)
+
+        zone_list.append("{}_{}".format(x_zone, y_zone))
+
+        zone_list.append("{}_{}".format(x_zone+1, y_zone))
+        zone_list.append("{}_{}".format(x_zone, y_zone+1))
+        zone_list.append("{}_{}".format(x_zone+1, y_zone+1))
+
+        clear_left = False
+        clear_down = False
+
+        if x_zone-1 >= 0:
+            clear_left = True
+
+        if y_zone-1 >= 0:
+            clear_down = True
+
+        if clear_down:
+            zone_list.append("{}_{}".format(x_zone, y_zone-1))
+            zone_list.append("{}_{}".format(x_zone+1, y_zone-1))
+        if clear_left:
+            zone_list.append("{}_{}".format(x_zone-1, y_zone))
+            zone_list.append("{}_{}".format(x_zone-1, y_zone+1))
+        if clear_left and clear_down:
+            zone_list.append("{}_{}".format(x_zone-1, y_zone-1))
+
+        return zone_list
+
+
+def get_tilemap(save_version: str, tiledata: dict) -> type:
+    """Selects the correct tilemap for the save version
+
+    :param save_version: The save files generated version
+    :type save_version: str
+    :param tiledata: The tiledata from the worldsave
+    :type tiledata: dict
+    :return: A class which can load the tilemap
+    :rtype: type
     """
 
     if save_version == "0.0.1":
-        return load_0_0_1(tiledata)
-
-
-def load_0_0_1(tiledata) -> arcade.SpriteList:
-    """Generator for dev version 0.0.1
-
-    :param tiledata: The tile list from the world save
-    :type tiledata: list
-    :return: Two of sprites for easy drawing and collision
-    :rtype: arcade.SpriteList
-    """
-
-    tile_lookup = {
-        "unknown": tiles_0_0_1.Unknown,
-        "0": tiles_0_0_1.Void,
-        "1": tiles_0_0_1.Grass,
-        "2": tiles_0_0_1.Stone,
-        "3": tiles_0_0_1.Tree,
-        "4": tiles_0_0_1.Wall,
-    }
-
-    tilemap = arcade.SpriteList(
-        use_spatial_hash=True,
-        is_static=True
-    )
-    collision_list = arcade.SpriteList()
-
-    for row_index, row in enumerate(tiledata):
-        for cell_index, cell in enumerate(row):
-            if list(cell.keys())[0] in tile_lookup:
-                tile = tile_lookup[list(cell.keys())[0]](
-                    center_x=((cell_index+1)*64)-128,
-                    center_y=((row_index+1)*64)-128
-                )
-            else:
-                tile = tile_lookup["unknown"](
-                    center_x=((cell_index+1)*64)-128,
-                    center_y=((row_index+1)*64)-128
-                )
-
-            tilemap.append(
-                tile
-            )
-            if tile.player_collides:
-                collision_list.append(
-                    tile
-                )
-
-    return tilemap, collision_list
+        return Save_0_0_1(save_version, tiledata)

@@ -85,20 +85,65 @@ def generate_tilemap() -> list:
     :rtype: list
     """
 
-    size = 30
+    zone_path = pathlib.Path("assets/data/zones/")
 
-    tilemap = [
-        [{0: 0} for i in range(size + 1)],
-        [{0: 0} for i in range(size + 1)]
-    ]
+    if not zone_path.exists():
+        zone_path.mkdir()
+
+    zone_size = 20
+
+    # Generates the first few zones
+    tile_zones = {
+        "size": zone_size,
+        "0_0": str(generate_zone(0, 0, zone_size)),
+        "1_0": str(generate_zone(1, 0, zone_size)),
+        "0_1": str(generate_zone(0, 1, zone_size)),
+        "1_1": str(generate_zone(1, 1, zone_size)),
+    }
+
+    return tile_zones
+
+
+def generate_zone(x: int, y: int, size: int) -> pathlib.Path:
+    """Generates a zone of the tilemap
+
+    :param x: X grid number
+    :type x: int
+    :param y: y grid number
+    :type y: int
+    :param size: how many tiles is the zone length
+    :type size: int
+    :return: Path to the zone save file
+    :rtype: pathlib.Path
+    """
+
+    zone_path = pathlib.Path(
+        "assets/data/zones/{}_{}.json".format(
+            x,
+            y
+        )
+    )
+
+    zone_tilemap = []
+
+    if y == 0:
+        zone_tilemap = [[{0: 0} for i in range(size)]]
 
     for i in range(size):
-        tilemap.insert(
+
+        row = [{1: 0} for i in range(size)]
+        if x == 0:
+            row[0] = {0: 0}
+
+        zone_tilemap.insert(
             i+1,
-            [{0: 0}] + [{1: 0} for i in range(size)] + [{0: 0}]
+            row
         )
 
-    return tilemap
+    with zone_path.open("w") as save:
+        json.dump(zone_tilemap, save, indent=4)
+
+    return zone_path
 
 
 def generate_passive() -> list:
@@ -109,3 +154,33 @@ def generate_passive() -> list:
     """
 
     return []
+
+
+def add_zone(x: int, y: int, size: int) -> pathlib.Path:
+    """Creates a new zone file, adds it to save and return the path directly
+
+    :param x: X position of zone
+    :type x: int
+    :param y: Y position of zone
+    :type y: int
+    :param size: How many cells across the zone is
+    :type size: int
+    :return: The path object to the zone save
+    :rtype: pathlib.Path
+    """
+
+    global save_path
+
+    zone_path = generate_zone(x, y, size)
+
+    zone_name = "{}_{}".format(x, y)
+
+    with save_path.open() as save:
+        data = json.load(save)
+
+    data["tilemap"][zone_name] = str(zone_path)
+
+    with save_path.open("w") as save:
+        json.dump(data, save, indent=4)
+
+    return zone_path

@@ -8,7 +8,7 @@ import arcade
 
 from assets.player.player import Player
 from assets.views.pauseView import PauseView
-from assets.world.generateTilemap import load_tilemap
+from assets.world.generateTilemap import get_tilemap
 from assets.world.loadWorldData import load_data
 
 
@@ -34,12 +34,16 @@ class GameView(arcade.View):
 
         self.world_data = load_data()
 
-        self.tilemap, self.collision_list = load_tilemap(
+        self.player = Player(self.world_data["player"])
+
+        self.tilemap = get_tilemap(
             self.world_data["version"],
             self.world_data["tilemap"]
         )
 
-        self.player = Player(self.world_data["player"])
+        self.rendered_zones, self.collision_list = self.tilemap.load_tilemap(
+            self.player.position
+        )
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player,
                                                          self.collision_list)
@@ -62,7 +66,7 @@ class GameView(arcade.View):
         """
         arcade.start_render()
 
-        self.tilemap.draw()
+        self.rendered_zones.draw()
         self.player.draw()
 
     def on_update(self, dt: float) -> None:
@@ -75,6 +79,12 @@ class GameView(arcade.View):
         self.physics_engine.update()
 
         self.player.on_update(dt)
+
+        if not self.tilemap.validate_zones(self.player.position):
+            self.rendered_zones, self.collision_list = self.tilemap.load_tilemap(  # noqa E501
+                self.player.position
+            )
+            self.physics_engine.walls = self.collision_list
 
         self.world_data["player"]["pos"] = list(self.player.position)
 

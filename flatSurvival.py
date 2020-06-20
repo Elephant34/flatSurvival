@@ -1,13 +1,13 @@
 """
 The entry point to start the game
 """
-from datetime import datetime
 import logging
 import pathlib
-
-from assets.views.menuView import MenuView
+from datetime import datetime
 
 import arcade
+
+from assets.views.menuView import MenuView
 
 
 def run() -> None:
