@@ -59,6 +59,8 @@ def generate_player() -> dict:
     :rtype: dict
     """
 
+    logging.info("Generating player")
+
     player_data = {
         "pos": [100, 100],
         "health": 100,
@@ -84,6 +86,8 @@ def generate_tilemap() -> list:
     :return: returns a 2d list of tile id's
     :rtype: list
     """
+
+    logging.info("Generating tilemap")
 
     zone_path = pathlib.Path("assets/data/zones/")
 
@@ -153,6 +157,8 @@ def generate_passive() -> list:
     :rtype: list
     """
 
+    logging.info("Generating passive")
+
     return []
 
 
@@ -168,6 +174,8 @@ def add_zone(x: int, y: int, size: int) -> pathlib.Path:
     :return: The path object to the zone save
     :rtype: pathlib.Path
     """
+
+    logging.info("Adding zone to world")
 
     global save_path
 

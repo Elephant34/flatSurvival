@@ -3,6 +3,7 @@ Different loader called depending on the game version
 This ensures saves are backwards compatable
 """
 import json
+import logging
 import pathlib
 from collections import Counter
 
@@ -42,6 +43,8 @@ class Save_0_0_1:
 
         self.loaded_zones = []
 
+        logging.info("Tilemap instance created")
+
     def load_tilemap(self, player_pos: tuple) -> arcade.SpriteList:
         """Loads all the rendered tilemap zones
 
@@ -50,6 +53,8 @@ class Save_0_0_1:
         :return: Returns two lists: all tiles and collision tiles
         :rtype: arcade.SpriteList
         """
+
+        logging.info("Tilemap loading")
 
         self.player_pos = player_pos
         self.loaded_zones = self.get_player_zones()
@@ -107,6 +112,8 @@ class Save_0_0_1:
                         self.collision_map.append(
                             tile
                         )
+
+        logging.info("Tilemap loaded")
 
         return self.tilemap, self.collision_map
 
