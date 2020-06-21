@@ -2,6 +2,7 @@
 Different loader called depending on the game version
 This ensures saves are backwards compatable
 """
+import time
 import json
 import logging
 import pathlib
@@ -57,18 +58,37 @@ class Save_0_0_1:
         logging.info("Tilemap loading")
 
         self.player_pos = player_pos
-        self.loaded_zones = self.get_player_zones()
 
-        self.tilemap = arcade.SpriteList(
-            use_spatial_hash=True,
-            is_static=True
-        )
-        self.collision_map = arcade.SpriteList(
-            use_spatial_hash=True,
-            is_static=True
-        )
+        if not self.loaded_zones:
+            self.loaded_zones = self.get_player_zones()
+            zones_to_load = self.loaded_zones
 
-        for zone in self.loaded_zones:
+            self.tilemap = arcade.SpriteList(
+                use_spatial_hash=True,
+                is_static=True
+            )
+            self.collision_map = arcade.SpriteList(
+                use_spatial_hash=True,
+                is_static=True
+            )
+        else:
+            for tile in self.tilemap:
+                if tile.zone not in self.loaded_zones:
+                    self.tilemap.remove(tile)
+
+            remove = []
+
+            zones_to_load = self.get_player_zones()
+            for zone in zones_to_load:
+                if zone in self.loaded_zones:
+                    remove.append(zone)
+
+            for zone in remove:
+                zones_to_load.remove(zone)
+
+        start = time.time()
+
+        for zone in zones_to_load:
 
             zone_x = int(zone[0])
             zone_y = int(zone[2])
@@ -97,12 +117,14 @@ class Save_0_0_1:
                     if list(cell.keys())[0] in self.tile_lookup:
                         tile = self.tile_lookup[list(cell.keys())[0]](
                             center_x=cell_x,
-                            center_y=cell_y
+                            center_y=cell_y,
+                            zone=zone
                         )
                     else:
                         tile = self.tile_lookup["unknown"](
                             center_x=cell_x,
-                            center_y=cell_y
+                            center_y=cell_y,
+                            zone=zone
                         )
 
                     self.tilemap.append(
@@ -112,6 +134,9 @@ class Save_0_0_1:
                         self.collision_map.append(
                             tile
                         )
+        print(time.time()-start)
+
+        self.loaded_zones = self.get_player_zones()
 
         logging.info("Tilemap loaded")
 
