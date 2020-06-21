@@ -71,9 +71,7 @@ class Save_0_0_1:
                 is_static=True
             )
         else:
-            for tile in self.tilemap:
-                if tile.zone not in self.loaded_zones:
-                    self.tilemap.remove(tile)
+            map(self.remove_zones, self.tilemap)
 
             zones_to_load = list(
                 set(self.get_player_zones()) ^ set(self.loaded_zones)
@@ -183,6 +181,15 @@ class Save_0_0_1:
             zone_list.append("{}_{}".format(x_zone-1, y_zone-1))
 
         return zone_list
+
+    def remove_zones(self, tile: tiles_0_0_1.Basic) -> None:
+        """Used when updating zones to clear old zones
+
+        :param tile: Tile to test
+        :type tile: tiles_0_0_1.Basic
+        """
+        if tile.zone not in self.loaded_zones:
+            self.tilemap.remove(tile)
 
 
 def get_tilemap(save_version: str, tiledata: dict) -> type:
