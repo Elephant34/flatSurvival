@@ -71,7 +71,7 @@ class Save_0_0_1:
                 is_static=True
             )
         else:
-            map(self.remove_zones, self.tilemap)
+            set(map(self.remove_zones, self.tilemap))
 
             zones_to_load = list(
                 set(self.get_player_zones()) ^ set(self.loaded_zones)
@@ -79,8 +79,8 @@ class Save_0_0_1:
 
         for zone in zones_to_load:
 
-            zone_x = int(zone[0])
-            zone_y = int(zone[2])
+            zone_x = int(zone.split("_")[0])
+            zone_y = int(zone.split("_")[1])
 
             try:
                 zone_path = pathlib.Path(self.tiledata[zone])

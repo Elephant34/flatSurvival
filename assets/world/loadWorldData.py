@@ -62,7 +62,7 @@ def generate_player() -> dict:
     logging.info("Generating player")
 
     player_data = {
-        "pos": [100, 100],
+        "pos": [20, 20],
         "health": 100,
         "hunger": 100,
         "multipliers": {
@@ -94,7 +94,7 @@ def generate_tilemap() -> list:
     if not zone_path.exists():
         zone_path.mkdir()
 
-    zone_size = 20
+    zone_size = 2
 
     # Generates the first few zones
     tile_zones = {
