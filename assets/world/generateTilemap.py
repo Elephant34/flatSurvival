@@ -75,15 +75,9 @@ class Save_0_0_1:
                 if tile.zone not in self.loaded_zones:
                     self.tilemap.remove(tile)
 
-            remove = []
-
-            zones_to_load = self.get_player_zones()
-            for zone in zones_to_load:
-                if zone in self.loaded_zones:
-                    remove.append(zone)
-
-            for zone in remove:
-                zones_to_load.remove(zone)
+            zones_to_load = list(
+                set(self.get_player_zones()) ^ set(self.loaded_zones)
+            )
 
         for zone in zones_to_load:
 
