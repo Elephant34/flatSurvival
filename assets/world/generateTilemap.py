@@ -5,7 +5,6 @@ This ensures saves are backwards compatable
 import json
 import logging
 import pathlib
-import time
 from collections import Counter
 
 import arcade
@@ -78,9 +77,7 @@ class Save_0_0_1:
                 set(self.get_player_zones()) ^ set(self.loaded_zones)
             )
 
-        start = time.time()
         set(map(self.load_zone, zones_to_load))
-        print(time.time()-start)
 
         self.loaded_zones = self.get_player_zones()
 
