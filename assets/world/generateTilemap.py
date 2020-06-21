@@ -2,7 +2,6 @@
 Different loader called depending on the game version
 This ensures saves are backwards compatable
 """
-import time
 import json
 import logging
 import pathlib
@@ -86,8 +85,6 @@ class Save_0_0_1:
             for zone in remove:
                 zones_to_load.remove(zone)
 
-        start = time.time()
-
         for zone in zones_to_load:
 
             zone_x = int(zone[0])
@@ -134,7 +131,6 @@ class Save_0_0_1:
                         self.collision_map.append(
                             tile
                         )
-        print(time.time()-start)
 
         self.loaded_zones = self.get_player_zones()
 
