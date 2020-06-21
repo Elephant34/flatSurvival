@@ -94,7 +94,7 @@ def generate_tilemap() -> list:
     if not zone_path.exists():
         zone_path.mkdir()
 
-    zone_size = 2
+    zone_size = 15
 
     # Generates the first few zones
     tile_zones = {
